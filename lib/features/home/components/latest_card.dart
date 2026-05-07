@@ -8,12 +8,15 @@ class LatestCard extends StatelessWidget {
   String description;
   String time;
   String status;
+  String? handledBy;
+
   LatestCard({
     super.key,
     required this.title,
     required this.description,
     required this.time,
     required this.status,
+    this.handledBy,
   });
 
   @override
@@ -32,15 +35,17 @@ class LatestCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Container(
             width: 4,
-            height: 120,
+            height: 130,
             decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.only(
+              color: primaryColor,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 bottomLeft: Radius.circular(12),
               ),
@@ -53,10 +58,12 @@ class LatestCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 12),
             padding: const EdgeInsets.all(12),
+
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: BorderRadius.circular(100),
             ),
+
             child: Icon(icon, color: primaryColor, size: 20),
           ),
 
@@ -65,12 +72,14 @@ class LatestCard extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(12),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
-                  /// TOP
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -93,12 +102,13 @@ class LatestCard extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       Text(
                         time,
                         style: AppFonts.inter(
                           context: context,
                           fontSize: 12,
-                          color: Colors.red,
+                          color: primaryColor,
                         ),
                       ),
                     ],
@@ -108,7 +118,7 @@ class LatestCard extends StatelessWidget {
 
                   Text(
                     title,
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppFonts.inter(
                       context: context,
@@ -129,6 +139,33 @@ class LatestCard extends StatelessWidget {
                       color: Colors.grey.shade600,
                     ),
                   ),
+
+                  if (isDone && handledBy != null) ...[
+                    const SizedBox(height: 8),
+
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 16,
+                          color: Colors.grey.shade600,
+                        ),
+
+                        const SizedBox(width: 4),
+
+                        Expanded(
+                          child: Text(
+                            "Ditangani oleh $handledBy",
+                            style: AppFonts.inter(
+                              context: context,
+                              fontSize: 12,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -1,3 +1,5 @@
+import 'package:helpdesk/core/model/pde_model.dart';
+
 class KomplainModel {
   final int id;
   final String nama;
@@ -8,6 +10,7 @@ class KomplainModel {
   final String tanggal;
   final String? nomorAct;
   final String? tanggalAct;
+  final PdeModel? pde;
 
   KomplainModel({
     required this.id,
@@ -19,6 +22,7 @@ class KomplainModel {
     required this.tanggal,
     this.nomorAct,
     this.tanggalAct,
+    this.pde,
   });
 
   factory KomplainModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +36,7 @@ class KomplainModel {
       tanggal: json['tanggal'] ?? '',
       nomorAct: json['nomor_act'],
       tanggalAct: json['tanggal_act'],
+      pde: json['pde'] != null ? PdeModel.fromJson(json['pde']) : null,
     );
   }
 }

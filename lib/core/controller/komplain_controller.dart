@@ -1,30 +1,38 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:helpdesk/core/model/komplain_model.dart';
+import 'package:helpdesk/core/network/paginate_response.dart';
 import 'package:helpdesk/core/repository/komplain_repository.dart';
 
-final komplainControllerProvider =
-    AsyncNotifierProvider<KomplainController, List<KomplainModel>>(
-      KomplainController.new,
-    );
+final komplainControllerProvider = AsyncNotifierProvider<
+  KomplainController,
+  PaginateResponse<KomplainModel>
+>(
+  KomplainController.new,
+);
 
-class KomplainController extends AsyncNotifier<List<KomplainModel>> {
-  KomplainRepository get repository => ref.read(komplainRepositoryProvider);
+class KomplainController
+    extends AsyncNotifier<PaginateResponse<KomplainModel>> {
+      
+  KomplainRepository get repository =>
+      ref.read(komplainRepositoryProvider);
 
   @override
-  Future<List<KomplainModel>> build() async {
+  Future<PaginateResponse<KomplainModel>> build() async {
     return getKomplain();
   }
 
-  Future<List<KomplainModel>> getKomplain({
+  Future<PaginateResponse<KomplainModel>> getKomplain({
     String? search,
     String? kategori,
+    bool? isDone,
+    int page = 1,
   }) async {
-    final result = await repository.getKomplain(
+    return repository.getKomplain(
       search: search,
       kategori: kategori,
+      isDone: isDone,
+      page: page,
     );
-
-    return result;
   }
 
   Future<void> refresh() async {
