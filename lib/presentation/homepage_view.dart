@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpdesk/constants/app_colors.dart';
+import 'package:helpdesk/constants/app_fonts.dart';
 import 'package:helpdesk/presentation/home/home_view.dart';
 import 'package:helpdesk/presentation/ticket/ticket_view.dart';
 
@@ -16,13 +17,35 @@ class _HomepageViewState extends State<HomepageView> {
   final List<Widget> _pages = [const HomeView(), const TicketView()];
 
   void _onTabTapped(int index) {
-    if (_currentIndex == index) return; // prevent rebuild unnecessary
+    if (_currentIndex == index) return;
     setState(() => _currentIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      drawer: const Drawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "SupportSync",
+          style: AppFonts.inter(
+            context: context,
+            fontSize: 24,
+            color: AppColors.primaryColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: IndexedStack(index: _currentIndex, children: _pages),
       bottomNavigationBar: _buildBottomNav(),
     );
@@ -30,6 +53,7 @@ class _HomepageViewState extends State<HomepageView> {
 
   Widget _buildBottomNav() {
     return BottomNavigationBar(
+      backgroundColor: Colors.white,
       currentIndex: _currentIndex,
       onTap: _onTabTapped,
       elevation: 8,
