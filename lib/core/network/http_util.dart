@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:helpdesk/utils/api_config.dart';
-import 'package:helpdesk/utils/api_response.dart';
+import 'package:helpdesk/core/network/api_config.dart';
+import 'package:helpdesk/core/network/api_response.dart';
 
 class HttpUtil {
   late final Dio _dio;

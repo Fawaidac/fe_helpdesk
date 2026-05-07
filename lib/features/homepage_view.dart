@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:helpdesk/constants/app_colors.dart';
 import 'package:helpdesk/constants/app_fonts.dart';
-import 'package:helpdesk/presentation/home/home_view.dart';
-import 'package:helpdesk/presentation/ticket/ticket_view.dart';
+import 'package:helpdesk/features/home/home_view.dart';
+import 'package:helpdesk/features/ticket/ticket_view.dart';
 
 class HomepageView extends StatefulWidget {
   const HomepageView({super.key});

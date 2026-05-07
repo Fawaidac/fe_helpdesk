@@ -7,15 +7,25 @@ class LatestCard extends StatelessWidget {
   String title;
   String description;
   String time;
+  String status;
   LatestCard({
     super.key,
     required this.title,
     required this.description,
     required this.time,
+    required this.status,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bool isDone = status == "DONE";
+
+    final Color primaryColor = isDone ? Colors.green : Colors.red;
+
+    final Color bgColor = isDone ? Colors.green.shade50 : Colors.red.shade50;
+
+    final IconData icon = isDone ? Icons.check_circle : Icons.warning;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -39,14 +49,15 @@ class LatestCard extends StatelessWidget {
 
           const SizedBox(width: 12),
 
+          /// ICON
           Container(
             margin: const EdgeInsets.only(top: 12),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.red.shade50,
+              color: bgColor,
               borderRadius: BorderRadius.circular(100),
             ),
-            child: const Icon(Icons.warning, color: Colors.red, size: 20),
+            child: Icon(icon, color: primaryColor, size: 20),
           ),
 
           const SizedBox(width: 12),
@@ -66,13 +77,20 @@ class LatestCard extends StatelessWidget {
                           horizontal: 10,
                           vertical: 4,
                         ),
+
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: bgColor,
                           borderRadius: BorderRadius.circular(6),
                         ),
+
                         child: Text(
-                          "INC-9042",
-                          style: AppFonts.inter(context: context, fontSize: 12),
+                          status,
+                          style: AppFonts.inter(
+                            context: context,
+                            fontSize: 12,
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Text(
